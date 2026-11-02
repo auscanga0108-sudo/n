@@ -1,0 +1,1121 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="robots" content="noindex, nofollow"><title>Guía de Emergencia</title>
+<style>:root{color-scheme:light;padding:env(safe-area-inset-top,0px) 0 env(safe-area-inset-bottom,0px)}body{margin:0;font:14px system-ui}img{max-width:100%}</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=IBM+Plex+Mono:wght@500;600&family=Source+Sans+3:wght@400;600;700&display=swap">
+<style>
+/* Concepto: tarjeta de triage. Una columna, bloques de color por prioridad (rojo, ámbar, verde), 911 siempre arriba. */
+:root {
+  --bg: #f1f3f4;
+  --surface: #ffffff;
+  --surface-2: #e7ebed;
+  --ink: #14202b;
+  --ink-2: #4a5966;
+  --line: #cfd6db;
+  --red: #c4122f;
+  --red-ink: #ffffff;
+  --amber: #8a5a00;
+  --amber-bg: #fbe7b5;
+  --green: #17653f;
+  --green-bg: #cdeedb;
+  --red-bg: #f9d3d9;
+  --focus: #0b5fff;
+  --font-display: "Barlow Condensed", "Arial Narrow", Arial, sans-serif;
+  --font-body: "Source Sans 3", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0d1418;
+    --surface: #162129;
+    --surface-2: #1f2d37;
+    --ink: #eaf0f3;
+    --ink-2: #a5b4bf;
+    --line: #2c3c47;
+    --red: #e5384f;
+    --red-ink: #ffffff;
+    --amber: #f1be4d;
+    --amber-bg: #3b2d0b;
+    --green: #67d39a;
+    --green-bg: #0f3322;
+    --red-bg: #46101b;
+    --focus: #7aa7ff;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0d1418;
+  --surface: #162129;
+  --surface-2: #1f2d37;
+  --ink: #eaf0f3;
+  --ink-2: #a5b4bf;
+  --line: #2c3c47;
+  --red: #e5384f;
+  --red-ink: #ffffff;
+  --amber: #f1be4d;
+  --amber-bg: #3b2d0b;
+  --green: #67d39a;
+  --green-bg: #0f3322;
+  --red-bg: #46101b;
+  --focus: #7aa7ff;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.5;
+  padding-block: 12px 40px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.wrap { max-width: 640px; margin-inline: auto; display: flex; flex-direction: column; gap: 20px; }
+h1, h2, h3 { font-family: var(--font-display); font-weight: 700; line-height: 1.05; margin: 0; text-wrap: balance; }
+h1 { font-size: 2.1rem; text-transform: uppercase; letter-spacing: 0.02em; }
+h2 { font-size: 1.6rem; text-transform: uppercase; letter-spacing: 0.03em; }
+p { margin: 0; }
+a { color: inherit; }
+:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+.label { font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-2); font-weight: 500; }
+
+/* Cabecera y llamada principal */
+.top { display: flex; flex-direction: column; gap: 10px; }
+.call911 {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  background: var(--red); color: var(--red-ink); text-decoration: none;
+  border-radius: 10px; padding: 16px 18px; min-height: 84px;
+}
+.call911 .big { font-family: var(--font-display); font-size: 3.6rem; font-weight: 700; line-height: 0.9; letter-spacing: 0.02em; }
+.call911 .txt { display: flex; flex-direction: column; text-align: right; font-weight: 600; min-width: 0; }
+.call911 .txt span:first-child { font-family: var(--font-display); font-size: 1.35rem; text-transform: uppercase; letter-spacing: 0.04em; line-height: 1.05; }
+.call911 .txt span:last-child { font-size: 0.9rem; opacity: 0.92; }
+.hint { font-size: 0.92rem; color: var(--ink-2); }
+
+nav.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+nav.chips a {
+  text-decoration: none; font-weight: 600; font-size: 0.95rem;
+  background: var(--surface); border: 1px solid var(--line); border-radius: 999px; padding: 9px 14px; min-height: 44px; display: inline-flex; align-items: center;
+}
+
+section { display: flex; flex-direction: column; gap: 12px; scroll-margin-top: 12px; }
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 14px; }
+
+/* Números */
+.numbers { display: flex; flex-direction: column; gap: 8px; padding: 0; margin: 0; list-style: none; }
+.num { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px 12px; align-items: center; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; }
+.num .who { font-weight: 700; min-width: 0; overflow-wrap: anywhere; }
+.num .who small { display: block; font-weight: 400; color: var(--ink-2); font-size: 0.88rem; }
+.num .tel { font-family: var(--font-mono); font-weight: 600; font-size: 1.1rem; margin-top: 2px; display: block; }
+.num .acts { display: flex; gap: 8px; }
+
+.btn {
+  font: inherit; font-weight: 700; cursor: pointer; text-decoration: none; text-align: center;
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  min-height: 46px; padding: 10px 16px; border-radius: 8px;
+  border: 1.5px solid var(--ink); background: transparent; color: var(--ink);
+}
+.btn.solid { background: var(--ink); color: var(--bg); }
+.btn.red { background: var(--red); color: var(--red-ink); border-color: var(--red); }
+.btn.small { min-height: 44px; padding: 8px 12px; font-size: 0.95rem; }
+.btn[disabled] { opacity: 0.6; cursor: progress; }
+
+/* Ubicación */
+.geo { display: flex; flex-direction: column; gap: 12px; }
+.geo-btn { min-height: 64px; font-size: 1.2rem; font-family: var(--font-display); letter-spacing: 0.04em; text-transform: uppercase; }
+.status { font-size: 0.98rem; color: var(--ink-2); min-height: 1.4em; }
+.status.err { color: var(--red); font-weight: 600; }
+.coords { font-family: var(--font-mono); font-size: 0.95rem; background: var(--surface-2); border-radius: 8px; padding: 10px 12px; overflow-wrap: anywhere; }
+textarea, input, select {
+  font: inherit; color: var(--ink); background: var(--surface); border: 1.5px solid var(--line); border-radius: 8px;
+  padding: 10px 12px; width: 100%; min-height: 46px; max-width: 100%;
+}
+textarea { resize: vertical; min-height: 92px; }
+.row-btns { display: flex; flex-wrap: wrap; gap: 8px; }
+.row-btns .btn { flex: 1 1 140px; }
+
+/* Primeros auxilios */
+.search { position: relative; }
+.list { display: flex; flex-direction: column; gap: 8px; }
+details.aid { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; }
+details.aid summary {
+  list-style: none; cursor: pointer; padding: 14px; min-height: 56px;
+  display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 4px 12px;
+}
+details.aid summary::-webkit-details-marker { display: none; }
+details.aid summary h3 { font-size: 1.35rem; letter-spacing: 0.02em; text-transform: uppercase; }
+details.aid summary::after { content: "+"; font-family: var(--font-mono); font-size: 1.6rem; line-height: 1; grid-column: 2; grid-row: 1 / span 2; }
+details.aid[open] summary::after { content: "–"; }
+details.aid[open] summary { border-bottom: 1px solid var(--line); }
+.pill { display: inline-block; justify-self: start; font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 600; padding: 3px 8px; border-radius: 4px; }
+.pill.r { background: var(--red-bg); color: var(--red); }
+.pill.a { background: var(--amber-bg); color: var(--amber); }
+.pill.g { background: var(--green-bg); color: var(--green); }
+.aid-body { padding: 14px; display: flex; flex-direction: column; gap: 12px; }
+.aid-body ol, .aid-body ul { margin: 0; padding-left: 1.3rem; display: flex; flex-direction: column; gap: 8px; }
+.aid-body .no { background: var(--surface-2); border-radius: 8px; padding: 10px 12px; font-size: 0.97rem; }
+.aid-body .no strong { font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; display: block; margin-bottom: 4px; }
+.empty { color: var(--ink-2); padding: 8px 2px; }
+
+/* Ficha médica */
+.form { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.form .full { grid-column: 1 / -1; }
+.form label { display: flex; flex-direction: column; gap: 4px; font-weight: 600; font-size: 0.93rem; min-width: 0; }
+@media (max-width: 460px) { .form { grid-template-columns: minmax(0, 1fr); } }
+
+.toast {
+  position: fixed; left: 50%; transform: translateX(-50%); bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+  background: var(--ink); color: var(--bg); padding: 10px 16px; border-radius: 8px; font-weight: 600; max-width: calc(100% - 32px);
+  opacity: 0; pointer-events: none; transition: opacity 0.2s;
+}
+.toast.show { opacity: 1; }
+.tabs { display: flex; flex-wrap: wrap; gap: 8px; }
+.tab { font: inherit; font-weight: 600; cursor: pointer; min-height: 44px; padding: 8px 14px; border-radius: 999px; border: 1.5px solid var(--line); background: var(--surface); color: var(--ink); max-width: 100%; overflow-wrap: anywhere; }
+.tab[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.tab.add { border-style: dashed; border-color: var(--ink-2); }
+.kv { display: flex; flex-direction: column; gap: 14px; }
+.kv-item { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.kv-item span:last-child { white-space: pre-line; overflow-wrap: anywhere; }
+.kv-item.warn { background: var(--amber-bg); border-radius: 8px; padding: 10px 12px; }
+.none { color: var(--ink-2); font-style: italic; }
+.blood { font-family: var(--font-display); font-size: 2.6rem; font-weight: 700; color: var(--red); line-height: 1; }
+.pname { font-family: var(--font-display); font-size: 2rem; font-weight: 700; text-transform: uppercase; line-height: 1.05; overflow-wrap: anywhere; }
+#linkOut { font-family: var(--font-mono); font-size: 0.8rem; min-height: 120px; word-break: break-all; }
+details.more summary { cursor: pointer; font-weight: 600; min-height: 44px; display: flex; align-items: center; }
+.more-body { display: flex; flex-direction: column; gap: 12px; padding-top: 8px; }
+.meter { position: sticky; bottom: env(safe-area-inset-bottom, 0px); z-index: 5; background: var(--surface); border: 1.5px solid var(--line); border-radius: 10px; padding: 10px 12px; display: flex; flex-direction: column; gap: 6px; }
+.meter-row { font-family: var(--font-mono); font-size: 0.85rem; font-weight: 600; }
+.bar { height: 8px; border-radius: 4px; background: var(--surface-2); overflow: hidden; }
+.bar span { display: block; height: 100%; width: 0; background: var(--green); transition: width 0.2s; }
+.meter.near .bar span { background: var(--amber); }
+.meter.over .bar span { background: var(--red); }
+.meter.over { border-color: var(--red); }
+.meter-hint { font-size: 0.88rem; color: var(--ink-2); margin: 0; }
+.meter.over .meter-hint { color: var(--red); font-weight: 600; }
+@media (prefers-reduced-motion: reduce) { .bar span { transition: none; } }
+.checks { border: 1.5px solid var(--line); border-radius: 8px; padding: 8px 12px 10px; margin: 0; min-width: 0; }
+.checks legend { font-weight: 600; font-size: 0.93rem; padding: 0 6px; }
+.chk-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 2px 12px; }
+.form .chk { flex-direction: row; align-items: center; gap: 10px; font-weight: 400; font-size: 0.95rem; min-height: 44px; }
+.chk input { width: 22px; height: 22px; min-height: 0; padding: 0; flex: none; accent-color: var(--red); }
+footer { font-size: 0.88rem; color: var(--ink-2); }
+@media (prefers-reduced-motion: reduce) { .toast { transition: none; } }
+</style>
+
+</head><body>
+<div class="wrap">
+  <header class="top">
+    <span class="label" id="topLabel">Guía de emergencia · México</span>
+    <h1>Si hay peligro de vida, llama primero</h1>
+    <a class="call911" id="call911" href="tel:911">
+      <span class="big">911</span>
+      <span class="txt"><span>Llamar ahora</span><span>Ambulancia, policía y bomberos</span></span>
+    </a>
+    <p class="hint">Si el botón no marca, abre el teclado de tu teléfono y escribe 911. Dile al operador dónde estás y qué ocurrió.</p>
+  </header>
+
+  <section id="card" hidden aria-labelledby="h-card">
+    <span class="label">Ficha médica de emergencia</span>
+    <h2 id="h-card">Ficha médica</h2>
+    <div class="tabs" id="cardTabs" role="group" aria-label="Personas de esta tarjeta" hidden></div>
+    <div class="panel" id="cardBody"></div>
+  </section>
+
+  <nav class="chips" aria-label="Secciones">
+    <a href="#numeros">Números</a>
+    <a href="#ubicacion">Mi ubicación</a>
+    <a href="#auxilios">Primeros auxilios</a>
+    <a id="chipFicha" href="#ficha">Ficha médica</a>
+    <a id="chipGen" href="#generador">Mi enlace</a>
+  </nav>
+
+  <section id="numeros" aria-labelledby="h-num">
+    <h2 id="h-num">Números de emergencia</h2>
+    <ul class="numbers" id="numList">
+      <li class="num">
+        <div class="who">Emergencias<small>Policía, bomberos y ambulancia</small><span class="tel">911</span></div>
+        <div class="acts"><a class="btn red small" href="tel:911">Llamar</a><button class="btn small" type="button" data-copy="911">Copiar</button></div>
+      </li>
+      <li class="num">
+        <div class="who">Denuncia anónima<small>Reportar delitos sin dar tu nombre</small><span class="tel">089</span></div>
+        <div class="acts"><a class="btn small" href="tel:089">Llamar</a><button class="btn small" type="button" data-copy="089">Copiar</button></div>
+      </li>
+      <li class="num">
+        <div class="who">Línea de la Vida<small>Apoyo en crisis emocional y adicciones</small><span class="tel">800 911 2000</span></div>
+        <div class="acts"><a class="btn small" href="tel:8009112000">Llamar</a><button class="btn small" type="button" data-copy="800 911 2000">Copiar</button></div>
+      </li>
+    </ul>
+    <p class="hint" id="numHint">Tus contactos de emergencia aparecen aquí cuando los guardas en la ficha médica.</p>
+  </section>
+
+  <section id="ubicacion" aria-labelledby="h-geo">
+    <h2 id="h-geo">Compartir mi ubicación</h2>
+    <div class="panel geo">
+      <button class="btn red geo-btn" id="geoBtn" type="button">Obtener mi ubicación</button>
+      <p class="status" id="geoStatus" role="status" aria-live="polite">El teléfono te pedirá permiso para usar tu ubicación.</p>
+      <div class="coords" id="coords" hidden></div>
+      <label class="label" for="msg">Mensaje para enviar</label>
+      <textarea id="msg" placeholder="Escribe aquí lo que ocurre. La ubicación se agrega cuando la obtengas."></textarea>
+      <div class="row-btns">
+        <button class="btn solid" type="button" id="copyMsg">Copiar mensaje</button>
+        <a class="btn" id="waLink" href="https://wa.me/" target="_blank" rel="noopener">WhatsApp</a>
+        <a class="btn" id="smsLink" href="sms:?&amp;body=">SMS</a>
+        <a class="btn" id="mapLink" href="https://www.google.com/maps" target="_blank" rel="noopener">Ver en mapa</a>
+      </div>
+      <p class="hint" id="geoNote">Si tu teléfono no permite compartir la ubicación desde aquí, abre Google Maps, toca el punto azul y elige “Compartir ubicación”.</p>
+    </div>
+  </section>
+
+  <section id="auxilios" aria-labelledby="h-aid">
+    <h2 id="h-aid">Primeros auxilios</h2>
+    <div class="search">
+      <label class="label" for="buscar">Buscar situación</label>
+      <input id="buscar" type="search" placeholder="Ejemplo: quemadura, alacrán, atragantamiento" autocomplete="off">
+    </div>
+    <div class="list" id="aidList"></div>
+    <p class="empty" id="aidEmpty" hidden>No hay resultados. Prueba con otra palabra o llama al 911.</p>
+  </section>
+
+  <section id="ficha" aria-labelledby="h-fic">
+    <h2 id="h-fic">Ficha médica</h2>
+    <p class="hint">Llena los datos de la persona que va a usar el chip. Se guardan solo en este navegador y no se envían a ningún servidor. Al terminar, crea el enlace en la sección Mi enlace de emergencia.</p>
+    <form class="panel form" id="fichaForm" autocomplete="off">
+      <label class="full" for="f-nombre">Nombre completo<input id="f-nombre" type="text" data-k="nombre"></label>
+      <label for="f-edad">Edad<input id="f-edad" type="text" inputmode="numeric" data-k="edad"></label>
+      <label for="f-sangre">Tipo de sangre
+        <select id="f-sangre" data-k="sangre">
+          <option value="">Sin dato</option>
+          <option>O+</option><option>O−</option><option>A+</option><option>A−</option>
+          <option>B+</option><option>B−</option><option>AB+</option><option>AB−</option>
+        </select>
+      </label>
+      <fieldset class="full checks"><legend>Alergias comunes</legend><div class="chk-grid" id="chk-aler"></div></fieldset>
+      <label class="full" for="f-alergias">Otras alergias<input id="f-alergias" type="text" data-k="alergias" maxlength="80"></label>
+      <fieldset class="full checks"><legend>Enfermedades o condiciones</legend><div class="chk-grid" id="chk-cond"></div></fieldset>
+      <label class="full" for="f-cond">Otras enfermedades<input id="f-cond" type="text" data-k="cond" maxlength="80"></label>
+      <label class="full" for="f-meds">Medicamentos que tomas<textarea id="f-meds" data-k="meds" maxlength="160"></textarea></label>
+      <label for="f-c1n">Contacto 1, nombre<input id="f-c1n" type="text" data-k="c1n"></label>
+      <label for="f-c1t">Contacto 1, teléfono<input id="f-c1t" type="tel" inputmode="tel" data-k="c1t"></label>
+      <label for="f-c2n">Contacto 2, nombre<input id="f-c2n" type="text" data-k="c2n"></label>
+      <label for="f-c2t">Contacto 2, teléfono<input id="f-c2t" type="tel" inputmode="tel" data-k="c2t"></label>
+      <label for="f-seg">Seguro de gastos médicos o servicio médico<select id="f-seg" data-k="seg"></select></label>
+      <label for="f-pol">Número de póliza o afiliación<input id="f-pol" type="text" data-k="pol" maxlength="30"></label>
+      <label class="full" for="f-hosp">Hospital de preferencia<input id="f-hosp" type="text" data-k="hosp"></label>
+      <fieldset class="full checks"><legend>Otra información importante</legend><div class="chk-grid" id="chk-notas"></div></fieldset>
+      <label class="full" for="f-notas">Otras indicaciones<input id="f-notas" type="text" data-k="notas" maxlength="80"></label>
+      <div class="full row-btns">
+        <button class="btn solid" type="button" id="copyFicha">Copiar esta ficha</button>
+        <button class="btn" type="button" id="clearFicha">Borrar esta ficha</button>
+      </div>
+    </form>
+    <div class="meter" id="meter" role="status" aria-live="polite" hidden>
+      <div class="meter-row" id="meterTxt">Espacio del chip: calculando…</div>
+      <div class="bar"><span id="meterBar"></span></div>
+      <p class="meter-hint" id="meterHint"></p>
+    </div>
+  </section>
+
+  <section id="generador" aria-labelledby="h-gen">
+    <h2 id="h-gen">Mi enlace de emergencia</h2>
+    <p class="hint">Cuando termines de llenar la ficha, crea el enlace. Lleva los datos de la ficha de arriba y es el que se graba en el chip. Cada chip lleva su propio enlace.</p>
+    <div class="panel geo">
+      <button class="btn red geo-btn" id="genBtn" type="button">Crear mi enlace</button>
+      <textarea id="linkOut" readonly hidden aria-label="Mi enlace de emergencia"></textarea>
+      <p class="status" id="linkInfo" role="status" aria-live="polite"></p>
+      <div class="row-btns">
+        <button class="btn solid" type="button" id="copyLink">Copiar enlace</button>
+        <a class="btn" id="prevLink" href="#" target="_blank" rel="noopener" hidden>Ver cómo se ve</a>
+      </div>
+      <details class="more">
+        <summary>Más opciones</summary>
+        <div class="more-body">
+          <div class="more-body" id="ownerOpts" hidden>
+          <label class="label" for="capSel">Capacidad de tu chip</label>
+          <select id="capSel">
+            <option value="137">137 bytes (mi chip)</option>
+            <option value="504">504 bytes (NTAG215)</option>
+            <option value="888">888 bytes (NTAG216)</option>
+          </select>
+          <label class="label" for="siteUrl">Dirección final del sitio (opcional, para medir el espacio antes de publicar)</label>
+          <input id="siteUrl" type="url" inputmode="url" placeholder="https://ficha.mx/">
+          </div>
+          <label class="label" for="importLink">Editar una ficha desde su enlace</label>
+          <input id="importLink" type="url" inputmode="url" placeholder="https://…#f=…">
+          <div class="row-btns">
+            <button class="btn" type="button" id="importBtn">Cargar para editar</button>
+            <button class="btn" type="button" id="newCard">Empezar ficha nueva</button>
+          </div>
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <footer>
+    Esta guía orienta en los primeros minutos y no sustituye un curso de primeros auxilios ni la atención médica. Ante la duda, llama al 911.
+  </footer>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function () {
+  "use strict";
+  var $ = function (id) { return document.getElementById(id); };
+
+  /* ---------- Utilidades ---------- */
+  var toastTimer;
+  function toast(t) {
+    var el = $("toast");
+    el.textContent = t;
+    el.classList.add("show");
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function () { el.classList.remove("show"); }, 2200);
+  }
+  function copyText(text, fallbackEl) {
+    function fallback() {
+      try {
+        var el = fallbackEl;
+        var tmp;
+        if (!el) { tmp = document.createElement("textarea"); tmp.value = text; tmp.style.position = "fixed"; tmp.style.opacity = "0"; document.body.appendChild(tmp); el = tmp; }
+        el.focus(); el.select();
+        var ok = document.execCommand && document.execCommand("copy");
+        if (tmp) document.body.removeChild(tmp);
+        toast(ok ? "Copiado" : "Selecciona el texto y cópialo");
+      } catch (e) { toast("Selecciona el texto y cópialo"); }
+    }
+    try {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(function () { toast("Copiado"); }, fallback);
+      } else { fallback(); }
+    } catch (e) { fallback(); }
+  }
+  function esc(s) { return String(s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
+  function digits(s) { return String(s || "").replace(/\D/g, ""); }
+
+  /* ---------- Copiar números ---------- */
+  document.addEventListener("click", function (e) {
+    var b = e.target.closest && e.target.closest("[data-copy]");
+    if (b) copyText(b.getAttribute("data-copy"));
+  });
+
+  /* ---------- Primeros auxilios ---------- */
+  var AID = [
+    { t: "Paro cardiaco (RCP)", lv: "r", tag: "Llama al 911 primero",
+      s: ["Toca los hombros y habla fuerte. Si no responde y no respira o solo boquea, pide a alguien que llame al 911 y busque un desfibrilador (DEA).",
+          "Acuesta a la persona boca arriba sobre una superficie firme.",
+          "Pon el talón de una mano en el centro del pecho y la otra mano encima, con los brazos rectos.",
+          "Empuja fuerte y rápido: 5 a 6 cm de profundidad, 100 a 120 veces por minuto. Deja que el pecho suba por completo entre compresiones.",
+          "Si sabes dar respiraciones: 30 compresiones y 2 soplos. Si no, sigue solo con compresiones sin parar.",
+          "Cuando llegue el DEA, enciéndelo y sigue sus indicaciones de voz. No te detengas hasta que lleguen los paramédicos o la persona reaccione."],
+      n: "En niños usa una o dos manos y comprime cerca de un tercio de la profundidad del tórax. En bebés, usa dos dedos en el centro del pecho." },
+    { t: "Atragantamiento", lv: "r", tag: "Llama al 911 si no se resuelve",
+      s: ["Si tose con fuerza, anímala a seguir tosiendo. No le des golpes.",
+          "Si no puede hablar, toser ni respirar: párate detrás y da 5 golpes firmes en la espalda, entre los omóplatos.",
+          "Después da 5 compresiones abdominales: puño arriba del ombligo, la otra mano encima, jalando hacia adentro y arriba.",
+          "Alterna 5 golpes y 5 compresiones hasta que expulse el objeto.",
+          "Si pierde el conocimiento, acuéstala, pide ayuda al 911 y empieza RCP."],
+      n: "Bebés menores de 1 año: boca abajo sobre tu antebrazo, 5 golpes en la espalda; luego boca arriba, 5 compresiones con dos dedos en el pecho. Nunca compresiones abdominales." },
+    { t: "Hemorragia fuerte", lv: "r", tag: "Llama al 911",
+      s: ["Ponte guantes o usa una bolsa limpia si puedes. Cubre la herida con una gasa o tela limpia.",
+          "Presiona con fuerza directa y continua. No levantes la tela para revisar; si se empapa, pon otra encima.",
+          "Si es en un brazo o pierna, elévalo por encima del corazón mientras presionas.",
+          "Si la presión no detiene un sangrado que pone en riesgo la vida en una extremidad, coloca un torniquete 5 a 7 cm arriba de la herida, apriétalo hasta que pare y anota la hora.",
+          "Mantén a la persona acostada y abrigada hasta que llegue la ayuda."],
+      n: "No retires objetos clavados: sujétalos y presiona alrededor. No aflojes un torniquete una vez puesto." },
+    { t: "Infarto", lv: "r", tag: "Llama al 911 primero",
+      s: ["Señales: presión u opresión en el pecho, dolor que baja al brazo, mandíbula o espalda, sudor frío, falta de aire, náusea.",
+          "Llama al 911 de inmediato, aunque los síntomas parezcan leves.",
+          "Siéntala en una posición cómoda y afloja la ropa.",
+          "Si no es alérgica y no tiene indicación médica en contra, que mastique una aspirina de 300 mg (o 4 de 81 mg).",
+          "Vigila su respiración. Si deja de responder y no respira, inicia RCP."],
+      n: "No la dejes sola ni la dejes manejar. No le des comida ni bebida." },
+    { t: "Derrame o embolia cerebral", lv: "r", tag: "Llama al 911 primero",
+      s: ["Revisa tres señales: cara caída de un lado, brazo débil que se cae al levantar ambos, habla arrastrada o confusa.",
+          "Otras señales: pérdida repentina de equilibrio o de la vista, dolor de cabeza intenso y repentino.",
+          "Llama al 911 y anota a qué hora empezaron los síntomas. El tiempo decide el tratamiento.",
+          "Acuéstala con la cabeza ligeramente elevada y vigila su respiración."],
+      n: "No le des comida, bebida ni medicinas." },
+    { t: "Reacción alérgica grave", lv: "r", tag: "Llama al 911 primero",
+      s: ["Señales: hinchazón de labios o cara, ronchas extensas, dificultad para respirar, voz ronca, mareo o desmayo.",
+          "Si tiene un autoinyector de epinefrina, aplícalo en el muslo y llama al 911.",
+          "Acuéstala con las piernas elevadas. Si le cuesta respirar, déjala sentada.",
+          "Si no mejora, se puede aplicar una segunda dosis a los 5 a 15 minutos con otro autoinyector.",
+          "Aunque mejore, debe ir a urgencias: los síntomas pueden regresar."],
+      n: "No le des nada de comer ni de beber." },
+    { t: "Picadura de alacrán", lv: "a", tag: "Ir a urgencias de inmediato",
+      s: ["Mantén a la persona tranquila y quieta. El movimiento y el miedo aceleran el veneno.",
+          "Lava la zona con agua y jabón y seca con suavidad.",
+          "Aplica una compresa fría envuelta en tela sobre la picadura.",
+          "Llama al 911 o llévala de inmediato a un hospital o centro de salud, aunque se sienta bien. Niños y adultos mayores son los más vulnerables.",
+          "Si puedes, lleva el alacrán en un frasco cerrado para identificarlo, sin arriesgarte a otra picadura."],
+      n: "No hagas cortes, no succiones, no pongas torniquete ni remedios caseros. Señales de alarma: salivación, babeo, movimientos extraños de ojos, inquietud, dificultad para respirar." },
+    { t: "Golpe de calor", lv: "r", tag: "Llama al 911",
+      s: ["Señales: piel muy caliente y enrojecida, confusión, mareo, desmayo, temperatura mayor a 40 °C, a veces sin sudor.",
+          "Mueve a la persona a la sombra o a un lugar fresco y quita la ropa de más.",
+          "Enfría el cuerpo ya: agua fresca sobre la piel, paños mojados en cuello, axilas e ingles, y ventílala.",
+          "Si está despierta y puede tragar, dale agua fresca en sorbos pequeños.",
+          "Sigue enfriando hasta que lleguen los paramédicos."],
+      n: "No le des bebidas si está inconsciente o confundida. Nunca dejes a niños o mascotas dentro de un auto cerrado." },
+    { t: "Quemaduras", lv: "a", tag: "Urgencias si es grande o grave",
+      s: ["Aleja a la persona de la fuente de calor. Si la ropa arde, que se tire al piso y ruede, o apágalo con una manta.",
+          "Enfría la quemadura con agua corriente fresca, no helada, durante 10 a 20 minutos.",
+          "Retira anillos, relojes o ropa floja de la zona antes de que se hinche. No quites tela pegada a la piel.",
+          "Cubre con una gasa limpia no adherente o plástico adherente.",
+          "Ve a urgencias si la quemadura es más grande que la palma de la mano, está en cara, manos, pies, genitales o articulaciones, es profunda, eléctrica o química."],
+      n: "No uses hielo, mantequilla, pasta dental ni aceites. No revientes las ampollas." },
+    { t: "Convulsiones", lv: "a", tag: "911 si dura más de 5 minutos",
+      s: ["Anota la hora de inicio. Mantén la calma y aleja objetos con los que pueda golpearse.",
+          "Protege su cabeza con algo suave, como una chamarra doblada.",
+          "Afloja la ropa del cuello.",
+          "Cuando terminen los movimientos, acuéstala de lado y quédate con ella hasta que despierte por completo.",
+          "Llama al 911 si dura más de 5 minutos, si es la primera vez, si se lesionó, si está embarazada o si le cuesta respirar después."],
+      n: "No la sujetes ni le metas nada en la boca. No le des agua ni comida hasta que esté totalmente despierta." },
+    { t: "Desmayo", lv: "g", tag: "Vigilar",
+      s: ["Acuesta a la persona boca arriba y eleva sus piernas unos 30 cm.",
+          "Afloja cinturón y cuello de la camisa. Asegura aire fresco.",
+          "Debe recuperarse en uno o dos minutos. Cuando despierte, déjala acostada un rato y ayúdala a sentarse despacio.",
+          "Si no despierta en un minuto, no respira normal o se golpeó la cabeza, llama al 911."],
+      n: "No le des de beber hasta que esté despierta y alerta." },
+    { t: "Fracturas y golpes", lv: "a", tag: "Atención médica",
+      s: ["No muevas a la persona si sospechas lesión de cuello o espalda. Llama al 911.",
+          "Inmoviliza la zona en la posición en que está, con una tablilla improvisada (cartón, revista enrollada) y una venda.",
+          "Aplica frío envuelto en tela por 15 a 20 minutos.",
+          "Si hay herida abierta, cúbrela con gasa limpia sin presionar el hueso.",
+          "Vigila color, temperatura y sensibilidad de los dedos debajo de la lesión."],
+      n: "No intentes acomodar el hueso. No pongas hielo directo sobre la piel." },
+    { t: "Heridas y cortadas leves", lv: "g", tag: "Cuidado en casa",
+      s: ["Lávate las manos. Presiona con una gasa limpia hasta que pare el sangrado.",
+          "Lava la herida con agua corriente y jabón suave. Retira tierra con agua, sin tallar.",
+          "Cubre con una gasa o curita limpia y cámbiala a diario.",
+          "Busca atención médica si es profunda, no deja de sangrar en 10 minutos, tiene tierra que no sale, fue mordida de animal o hay signos de infección (pus, calor, enrojecimiento que crece, fiebre)."],
+      n: "Revisa si tienes la vacuna contra el tétanos al día." },
+    { t: "Intoxicación o envenenamiento", lv: "r", tag: "Llama al 911",
+      s: ["Retira a la persona de la fuente (gas, humo, producto químico) hacia el aire fresco.",
+          "Llama al 911 y ten a la mano el envase, el producto o los medicamentos para decir qué y cuánto fue.",
+          "Si cayó en la piel o en la ropa, quita la ropa y enjuaga con agua abundante por 15 minutos. En ojos, lava con agua corriente 15 minutos.",
+          "Si está inconsciente, acuéstala de lado y vigila su respiración."],
+      n: "No provoques el vómito ni le des leche o remedios caseros salvo indicación de un médico." }
+  ];
+
+  var LV = { r: "Crítico", a: "Urgente", g: "Leve" };
+  var list = $("aidList");
+  list.innerHTML = AID.map(function (a, i) {
+    return '<details class="aid" data-q="' + esc((a.t + " " + a.s.join(" ")).toLowerCase()) + '">' +
+      "<summary><h3>" + esc(a.t) + '</h3><span class="pill ' + a.lv + '">' + LV[a.lv] + " · " + esc(a.tag) + "</span></summary>" +
+      '<div class="aid-body"><ol>' + a.s.map(function (x) { return "<li>" + esc(x) + "</li>"; }).join("") + "</ol>" +
+      '<div class="no"><strong>Ten en cuenta</strong>' + esc(a.n) + "</div></div></details>";
+  }).join("");
+
+  function norm(s) { return s.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, ""); }
+  $("buscar").addEventListener("input", function () {
+    var q = norm(this.value.trim());
+    var shown = 0;
+    Array.prototype.forEach.call(list.children, function (d) {
+      var hit = !q || norm(d.getAttribute("data-q")).indexOf(q) !== -1;
+      d.hidden = !hit;
+      if (hit) shown++;
+    });
+    $("aidEmpty").hidden = shown > 0;
+  });
+
+  /* ---------- Fichas médicas y tarjeta NFC ---------- */
+  var VIEW = /^#f=/.test(location.hash);
+  var EDITOR = !!$("ficha");
+  var ADMIN = !!$("generador");
+  /* Los bytes solo se muestran en el teléfono de quien abre la página con #medir al final (#medir-no lo oculta) */
+  function setOwner() {
+    try {
+      if (location.hash === "#medir") localStorage.setItem("guia-emergencia-medir", "1");
+      else if (location.hash === "#medir-no") localStorage.removeItem("guia-emergencia-medir");
+    } catch (e) {}
+  }
+  setOwner();
+  var OWNER = false;
+  try { OWNER = localStorage.getItem("guia-emergencia-medir") === "1"; } catch (e) {}
+  if (location.hash === "#medir") OWNER = true;
+  window.addEventListener("hashchange", function () { if (/^#medir(-no)?$/.test(location.hash)) { setOwner(); location.reload(); } });
+  var KEY = "guia-emergencia-fichas";
+  var OLD = "guia-emergencia-ficha";
+  var BASEKEY = "guia-emergencia-base";
+  var KEYS = ["nombre", "edad", "sangre", "alergias", "cond", "meds", "c1n", "c1t", "c2n", "c2t", "seg", "hosp", "notas"];
+  var TEXTK = KEYS.concat(["pol"]);
+  var LISTK = ["alerL", "condL", "notasL"];
+  /* CODEC-START */
+  var BLOOD = ["O+", "O−", "A+", "A−", "B+", "B−", "AB+", "AB−"];
+  var ALER = ["Penicilina", "Sulfas", "Aspirina o antiinflamatorios", "Látex", "Mariscos", "Cacahuate o nueces", "Huevo", "Leche", "Abeja o avispa", "Yodo o contraste", "Anestesia", "Polen o polvo"];
+  var COND = ["Diabetes", "Hipertensión", "Asma o EPOC", "Epilepsia", "Enfermedad del corazón", "Marcapasos", "Toma anticoagulantes", "Enfermedad renal", "Cáncer en tratamiento", "Embarazo", "Trasplante", "Hemofilia", "Discapacidad", "Alzheimer o demencia"];
+  var NOTAS = ["Donador de órganos", "Implante o prótesis", "No acepta transfusiones", "Usa lentes de contacto"];
+  var INS = ["", "GNP", "AXA", "MetLife", "Monterrey New York Life", "Allianz", "Mapfre", "Zurich", "Atlas", "Inbursa", "BBVA Seguros", "IMSS", "ISSSTE", "Pemex", "Otro"];
+  /* 64 símbolos de 6 bits: 51 = mayúscula para la siguiente letra, 63 = palabra completa en mayúsculas */
+  var SYM = "abcdefghijklmnopqrstuvwxyz 0123456789áéíóúñü,.-/+()" + "\u0001" + ":;%&'#@!?¿¡" + "\u0002";
+  function BitW() { this.b = []; }
+  BitW.prototype.put = function (v, n) { for (var i = n - 1; i >= 0; i--) this.b.push((v >> i) & 1); };
+  BitW.prototype.putBig = function (v, n) { for (var i = n - 1; i >= 0; i--) this.b.push(Number((v >> BigInt(i)) & BigInt(1))); };
+  BitW.prototype.bytes = function () {
+    var out = [];
+    for (var i = 0; i < this.b.length; i += 8) { var x = 0; for (var j = 0; j < 8; j++) x = x * 2 + (this.b[i + j] || 0); out.push(x); }
+    while (out.length && !out[out.length - 1]) out.pop();
+    return new Uint8Array(out);
+  };
+  function BitR(bytes) { this.y = bytes; this.p = 0; }
+  BitR.prototype.get = function (n) { var v = 0; for (var i = 0; i < n; i++) { var by = this.y[this.p >> 3] || 0; v = v * 2 + ((by >> (7 - (this.p & 7))) & 1); this.p++; } return v; };
+  BitR.prototype.getBig = function (n) { var v = BigInt(0); for (var i = 0; i < n; i++) v = (v << BigInt(1)) | BigInt(this.get(1)); return v; };
+  function putLen(w, n) { if (n < 31) w.put(n, 5); else { w.put(31, 5); w.put(Math.min(n - 31, 255), 8); } }
+  function getLen(r) { var n = r.get(5); return n < 31 ? n : 31 + r.get(8); }
+  function putText(w, str) {
+    var codes = [];
+    clean(str).slice(0, 200).split(" ").forEach(function (tok) {
+      if (!tok) return;
+      if (codes.length) codes.push(26);
+      var letters = tok.replace(/[^A-Za-zÁÉÍÓÚÑÜáéíóúñü]/g, "");
+      var lock = letters.length > 1 && letters === letters.toUpperCase();
+      if (lock) codes.push(63);
+      for (var i = 0; i < tok.length; i++) {
+        var ch = tok.charAt(i), lo = ch.toLowerCase();
+        if (!lock && lo !== ch) codes.push(51);
+        var idx = SYM.indexOf(lo);
+        codes.push(idx < 0 || idx === 51 || idx === 63 || lo.length !== 1 ? SYM.indexOf("?") : idx);
+      }
+    });
+    codes = codes.slice(0, 286);
+    putLen(w, codes.length);
+    codes.forEach(function (c) { w.put(c, 6); });
+  }
+  function getText(r) {
+    var n = getLen(r), out = "", shift = false, lock = false;
+    for (var i = 0; i < n; i++) {
+      var c = r.get(6);
+      if (c === 51) { shift = true; continue; }
+      if (c === 63) { lock = true; continue; }
+      if (c === 26) { shift = false; lock = false; out += " "; continue; }
+      var ch = SYM.charAt(c);
+      if (shift || lock) ch = ch.toUpperCase();
+      shift = false;
+      out += ch;
+    }
+    return out;
+  }
+  function putDigits(w, v) {
+    var d = String(v || "").replace(/\D/g, "").slice(0, 15);
+    w.put(d.length, 4);
+    if (d.length) w.putBig(BigInt(d), Math.ceil(d.length * 3.3219281));
+  }
+  function getDigits(r) {
+    var n = r.get(4);
+    if (!n) return "";
+    var t = r.getBig(Math.ceil(n * 3.3219281)).toString();
+    while (t.length < n) t = "0" + t;
+    return t;
+  }
+  function putMask(w, arr, list) {
+    var m = list.map(function (t) { return (arr || []).indexOf(t) >= 0 ? 1 : 0; });
+    if (!m.some(Boolean)) { w.put(0, 1); return; }
+    w.put(1, 1);
+    m.forEach(function (b) { w.put(b, 1); });
+  }
+  function getMask(r, list) {
+    var out = [];
+    if (!r.get(1)) return out;
+    list.forEach(function (t) { if (r.get(1)) out.push(t); });
+    return out;
+  }
+  function putPolicy(w, v) {
+    var t = clean(v);
+    if (!t) w.put(0, 2);
+    else if (/^\d{1,15}$/.test(t)) { w.put(1, 2); putDigits(w, t); }
+    else { w.put(2, 2); putText(w, t); }
+  }
+  function getPolicy(r) { var t = r.get(2); return t === 1 ? getDigits(r) : (t === 2 ? getText(r) : ""); }
+  function packPerson(d) {
+    var w = new BitW();
+    putText(w, d.nombre);
+    var bi = BLOOD.indexOf(d.sangre);
+    if (bi >= 0) { w.put(1, 1); w.put(bi, 3); } else w.put(0, 1);
+    putMask(w, d.alerL, ALER); putText(w, d.alergias);
+    putText(w, d.c1n); putDigits(w, d.c1t);
+    putMask(w, d.condL, COND); putText(w, d.cond);
+    putText(w, d.meds);
+    putMask(w, d.notasL, NOTAS); putText(w, d.notas);
+    putText(w, d.c2n); putDigits(w, d.c2t);
+    w.put(Math.max(0, INS.indexOf(d.seg)), 4);
+    putPolicy(w, d.pol);
+    putText(w, d.hosp);
+    var age = parseInt(d.edad, 10);
+    if (age >= 0 && age <= 127) { w.put(1, 1); w.put(age, 7); } else w.put(0, 1);
+    return w.bytes();
+  }
+  function unpackPerson(bytes) {
+    var r = new BitR(bytes), d = {};
+    d.nombre = getText(r);
+    d.sangre = r.get(1) ? (BLOOD[r.get(3)] || "") : "";
+    d.alerL = getMask(r, ALER); d.alergias = getText(r);
+    d.c1n = getText(r); d.c1t = getDigits(r);
+    d.condL = getMask(r, COND); d.cond = getText(r);
+    d.meds = getText(r);
+    d.notasL = getMask(r, NOTAS); d.notas = getText(r);
+    d.c2n = getText(r); d.c2t = getDigits(r);
+    d.seg = INS[r.get(4)] || "";
+    d.pol = getPolicy(r);
+    d.hosp = getText(r);
+    d.edad = r.get(1) ? String(r.get(7)) : "";
+    return d;
+  }
+  /* CODEC-END */
+  function buildChecks(id, key, list) {
+    var box = $(id);
+    if (!box) return;
+    box.innerHTML = list.map(function (t, i) {
+      return '<label class="chk"><input type="checkbox" id="' + key + "-" + i + '" data-list="' + key + '" value="' + esc(t) + '"><span>' + esc(t) + "</span></label>";
+    }).join("");
+  }
+  buildChecks("chk-aler", "aler", ALER);
+  buildChecks("chk-cond", "cond", COND);
+  buildChecks("chk-notas", "notas", NOTAS);
+  var segSel = $("f-seg");
+  if (segSel) segSel.innerHTML = INS.map(function (t, i) { return '<option value="' + (i ? esc(t) : "") + '">' + (i ? esc(t) : "Sin seguro o no aplica") + "</option>"; }).join("");
+  var fields = Array.prototype.slice.call(document.querySelectorAll("[data-k], [data-list]"));
+  function newId() { return "p" + Date.now().toString(36) + Math.random().toString(36).slice(2, 6); }
+  function blankStore() { var id = newId(); return { active: id, fam: "", list: [{ id: id, data: {} }] }; }
+  function loadStore() {
+    if (VIEW) return blankStore();
+    var st = null;
+    try { st = JSON.parse(localStorage.getItem(KEY) || "null"); } catch (e) {}
+    if (!st || !Array.isArray(st.list) || !st.list.length) {
+      var old = {};
+      try { old = JSON.parse(localStorage.getItem(OLD) || "{}") || {}; } catch (e) {}
+      var id = newId();
+      st = { active: id, fam: "", list: [{ id: id, data: old }] };
+    }
+    if (typeof st.fam !== "string") st.fam = "";
+    st.list = st.list.slice(0, 1);
+    if (!st.list.some(function (p) { return p.id === st.active; })) st.active = st.list[0].id;
+    return st;
+  }
+  var store = loadStore();
+  function persist() { if (VIEW) return; try { localStorage.setItem(KEY, JSON.stringify(store)); } catch (e) {} }
+  function activeP() { return store.list.filter(function (p) { return p.id === store.active; })[0]; }
+  function readFicha() {
+    var o = { alerL: [], condL: [], notasL: [] };
+    if (VIEW || !fields.length) {
+      var d0 = (activeP() && activeP().data) || {};
+      TEXTK.forEach(function (k) { o[k] = String(d0[k] || "").trim(); });
+      LISTK.forEach(function (k) { o[k] = Array.isArray(d0[k]) ? d0[k].slice() : []; });
+      return o;
+    }
+    fields.forEach(function (f) {
+      if (f.type === "checkbox") { if (f.checked) o[f.getAttribute("data-list") + "L"].push(f.value); }
+      else o[f.getAttribute("data-k")] = f.value.trim();
+    });
+    return o;
+  }
+  function fillForm() {
+    if (!fields.length) return;
+    var d = activeP().data || {};
+    fields.forEach(function (f) {
+      if (f.type === "checkbox") f.checked = (d[f.getAttribute("data-list") + "L"] || []).indexOf(f.value) >= 0;
+      else f.value = d[f.getAttribute("data-k")] || "";
+    });
+    var fn = $("famName");
+    if (fn) fn.value = store.fam || "";
+  }
+  function switchTo(id) {
+    if (store.active === id) return;
+    store.active = id;
+    persist(); refreshAll();
+  }
+  function renderTabs() {
+    if (!VIEW) { $("clearFicha").textContent = "Borrar esta ficha"; return; }
+    var box = $("cardTabs");
+    box.textContent = "";
+    box.hidden = VIEW && store.list.length < 2;
+    store.list.forEach(function (p, i) {
+      var b = document.createElement("button");
+      b.type = "button";
+      b.className = "tab";
+      b.setAttribute("aria-pressed", p.id === store.active ? "true" : "false");
+      b.textContent = (p.data && p.data.nombre) ? p.data.nombre : "Persona " + (i + 1);
+      b.addEventListener("click", function () { switchTo(p.id); });
+      box.appendChild(b);
+    });
+  }
+  function refreshAll() {
+    fillForm(); renderTabs(); renderContacts();
+    if (VIEW) renderCard();
+    resetMsg();
+    scheduleMeter();
+  }
+  function saveFicha() {
+    activeP().data = readFicha();
+    persist();
+    renderContacts(); refreshMessage(); scheduleMeter();
+  }
+  function resetMsg() { userEdited = false; refreshMessage(); }
+  function renderContacts() {
+    if (VIEW) return;
+    var f = readFicha();
+    var old = document.querySelectorAll("#numList li[data-mine]");
+    Array.prototype.forEach.call(old, function (n) { n.parentNode.removeChild(n); });
+    [["c1n", "c1t"], ["c2n", "c2t"]].forEach(function (p) {
+      var name = f[p[0]], tel = f[p[1]];
+      if (!tel) return;
+      var li = document.createElement("li");
+      li.className = "num";
+      li.setAttribute("data-mine", "1");
+      li.innerHTML = '<div class="who">' + esc(name || "Contacto de emergencia") + "<small>Contacto de " + esc(f.nombre || "esta ficha") + "</small>" +
+        '<span class="tel">' + esc(tel) + '</span></div><div class="acts"><a class="btn small" href="tel:' + esc(digits(tel)) + '">Llamar</a>' +
+        '<button class="btn small" type="button" data-copy="' + esc(tel) + '">Copiar</button></div>';
+      $("numList").appendChild(li);
+    });
+  }
+
+  function comb(f, lk, tk) { return (f[lk + "L"] || []).concat(f[tk] ? [f[tk]] : []).join(", "); }
+  /* Tarjeta de solo lectura (cuando se abre un enlace de etiqueta) */
+  function renderCard() {
+    var f = readFicha();
+    $("h-card").textContent = store.fam || "Ficha médica";
+    var NO = '<span class="none">No registrado</span>';
+    var h = '<div class="kv"><div class="pname">' + esc(f.nombre || "Sin nombre") + "</div>";
+    function item(label, val, cls) {
+      h += '<div class="kv-item' + (cls ? " " + cls : "") + '"><span class="label">' + label + "</span>" +
+        (val ? "<span>" + esc(val) + "</span>" : NO) + "</div>";
+    }
+    h += '<div class="kv-item"><span class="label">Tipo de sangre</span>' + (f.sangre ? '<span class="blood">' + esc(f.sangre) + "</span>" : NO) + "</div>";
+    var al = comb(f, "aler", "alergias");
+    item("Alergias", al, al ? "warn" : "");
+    item("Enfermedades o condiciones", comb(f, "cond", "cond"));
+    item("Medicamentos", f.meds);
+    item("Otra información importante", comb(f, "notas", "notas"));
+    var cs = [["c1n", "c1t"], ["c2n", "c2t"]].filter(function (p) { return f[p[1]]; });
+    h += '<div class="kv-item"><span class="label">Contactos de emergencia</span>';
+    if (cs.length) {
+      h += '<ul class="numbers">' + cs.map(function (p) {
+        return '<li class="num"><div class="who">' + esc(f[p[0]] || "Contacto de emergencia") +
+          '<span class="tel">' + esc(f[p[1]]) + '</span></div><div class="acts"><a class="btn red small" href="tel:' + esc(digits(f[p[1]])) + '">Llamar</a>' +
+          '<button class="btn small" type="button" data-copy="' + esc(f[p[1]]) + '">Copiar</button></div></li>';
+      }).join("") + "</ul>";
+    } else h += NO;
+    h += "</div>";
+    item("Seguro de gastos médicos", [f.seg, f.pol].filter(Boolean).join(" \u00b7 "));
+    item("Hospital de preferencia", f.hosp);
+    item("Edad", f.edad);
+    h += "</div>";
+    $("cardBody").innerHTML = h;
+  }
+
+  if (EDITOR) fillForm();
+  fields.forEach(function (f) {
+    f.addEventListener("input", saveFicha);
+    f.addEventListener("change", saveFicha);
+  });
+  if (EDITOR) { renderTabs(); renderContacts(); }
+
+  function fichaText() {
+    var f = readFicha();
+    var L = [];
+    L.push("FICHA MÉDICA DE EMERGENCIA");
+    if (f.nombre) L.push("Nombre: " + f.nombre);
+    if (f.edad) L.push("Edad: " + f.edad);
+    if (f.sangre) L.push("Tipo de sangre: " + f.sangre);
+    if (comb(f, "aler", "alergias")) L.push("Alergias: " + comb(f, "aler", "alergias"));
+    if (comb(f, "cond", "cond")) L.push("Condiciones: " + comb(f, "cond", "cond"));
+    if (f.meds) L.push("Medicamentos: " + f.meds);
+    if (f.c1t) L.push("Contacto 1: " + (f.c1n || "") + " " + f.c1t);
+    if (f.c2t) L.push("Contacto 2: " + (f.c2n || "") + " " + f.c2t);
+    if (f.seg || f.pol) L.push("Seguro de gastos médicos: " + [f.seg, f.pol].filter(Boolean).join(" "));
+    if (f.hosp) L.push("Hospital de preferencia: " + f.hosp);
+    if (comb(f, "notas", "notas")) L.push("Otra información importante: " + comb(f, "notas", "notas"));
+    return L.length > 1 ? L.join("\n") : "";
+  }
+  if (EDITOR) $("copyFicha").addEventListener("click", function () {
+    var t = fichaText();
+    if (!t) { toast("Llena al menos un dato primero"); return; }
+    copyText(t);
+  });
+  var clearArmed = false, clearTimer;
+  if (EDITOR) $("clearFicha").addEventListener("click", function () {
+    var b = this;
+    if (!clearArmed) {
+      clearArmed = true; b.textContent = "Toca otra vez para confirmar";
+      clearTimer = setTimeout(function () { clearArmed = false; renderTabs(); }, 3500);
+      return;
+    }
+    clearTimeout(clearTimer); clearArmed = false;
+    if (store.list.length > 1) {
+      store.list = store.list.filter(function (p) { return p.id !== store.active; });
+      store.active = store.list[0].id;
+      toast("Persona eliminada");
+    } else {
+      activeP().data = {};
+      toast("Datos borrados");
+    }
+    persist(); refreshAll();
+  });
+
+  /* Codificación del enlace: los datos viajan en el # de la dirección */
+  function b64u(bytes) {
+    var t = "";
+    for (var i = 0; i < bytes.length; i++) t += String.fromCharCode(bytes[i]);
+    return btoa(t).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
+  }
+  function ub64(t) {
+    t = t.replace(/-/g, "+").replace(/_/g, "/");
+    while (t.length % 4) t += "=";
+    var r = atob(t), o = new Uint8Array(r.length);
+    for (var i = 0; i < r.length; i++) o[i] = r.charCodeAt(i);
+    return o;
+  }
+  async function pipe(bytes, stream) {
+    var w = stream.writable.getWriter();
+    w.write(bytes).catch(function () {});
+    w.close().catch(function () {});
+    return new Uint8Array(await new Response(stream.readable).arrayBuffer());
+  }
+  /* Formato anterior (t / y): campos separados por caracteres de control; se conserva para leer enlaces viejos */
+  var WIRE = ["nombre", "sangre", "alergias", "c1n", "c1t", "cond", "meds", "notas", "c2n", "c2t", "seg", "hosp", "edad"];
+  function clean(v) { return String(v || "").replace(/[\x1e\x1f]/g, "").replace(/\s+/g, " ").trim(); }
+  /* Formato actual (b): datos empaquetados en bits, una sola persona */
+  async function buildCode() {
+    var p = store.list[0], bytes = packPerson((p && p.data) || {});
+    return bytes.length ? "b" + b64u(bytes) : "";
+  }
+  async function decodeCode(code) {
+    var t = code.charAt(0), bytes = ub64(code.slice(1));
+    if (t === "b") return { fam: "", rows: [unpackPerson(bytes)] };
+    if (t === "z" || t === "y") bytes = await pipe(bytes, new DecompressionStream("deflate-raw"));
+    else if (t !== "r" && t !== "t") throw new Error("formato");
+    var text = new TextDecoder().decode(bytes);
+    if (t === "r" || t === "z") {
+      var arr = JSON.parse(text);
+      if (!Array.isArray(arr) || !Array.isArray(arr[1]) || !arr[1].length) throw new Error("formato");
+      return { fam: arr[0], rows: arr[1].map(function (r) { var d = {}; KEYS.forEach(function (k, i) { d[k] = (r && r[i]) || ""; }); return d; }) };
+    }
+    var parts = text.split("\x1e");
+    var fam = "", lines = parts;
+    if (parts.length > 1) { fam = parts[0]; lines = parts.slice(1); }
+    return { fam: fam, rows: lines.map(function (line) {
+      var f = line.split("\x1f"), d = {};
+      WIRE.forEach(function (k, i) {
+        var v = f[i] || "";
+        if (k === "sangre") v = /^[0-7]$/.test(v) ? BLOOD[+v] : "";
+        d[k] = v;
+      });
+      return d;
+    }) };
+  }
+  function storeFromArr(obj) {
+    var list = obj.rows.slice(0, VIEW ? 8 : 1).map(function (r) {
+      var d = {};
+      TEXTK.forEach(function (k) { d[k] = String(r[k] || "").slice(0, 500); });
+      LISTK.forEach(function (k) { d[k] = Array.isArray(r[k]) ? r[k].filter(function (x) { return typeof x === "string"; }) : []; });
+      return { id: newId(), data: d };
+    });
+    if (!list.length) throw new Error("formato");
+    return { active: list[0].id, fam: String(obj.fam || "").slice(0, 80), list: list };
+  }
+
+  /* Generador de enlace y medidor de espacio */
+  var CAPKEY = "guia-emergencia-cap", SITEKEY = "guia-emergencia-site";
+  var capEl = $("capSel"), siteEl = $("siteUrl");
+  try { var c0 = localStorage.getItem(CAPKEY); if (c0 && capEl) capEl.value = c0; } catch (e) {}
+  try { var s0 = localStorage.getItem(SITEKEY); if (s0 && siteEl) siteEl.value = s0; } catch (e) {}
+  function capNow() { return (OWNER && capEl && parseInt(capEl.value, 10)) || 137; }
+  function siteBase() {
+    var v = (OWNER && siteEl) ? siteEl.value.trim() : "";
+    var b = (/^https?:\/\/\S+$/i.test(v) ? v : location.href).split("#")[0];
+    return b.replace(/index\.html?$/i, "");
+  }
+  /* Tamaño aproximado del mensaje NDEF: 5 bytes de encabezado + dirección sin el prefijo https:// o https://www. */
+  function msgBytes(url) {
+    var m = /^https:\/\/(www\.)?/i.exec(url) || /^http:\/\/(www\.)?/i.exec(url);
+    var rest = m ? url.slice(m[0].length) : url;
+    return 5 + new TextEncoder().encode(rest).length;
+  }
+  async function makeLink() {
+    var code = await buildCode();
+    if (!code) return null;
+    var url = siteBase() + "#f=" + code;
+    return { url: url, need: msgBytes(url) };
+  }
+  function linkMsg(text, bad) { var i = $("linkInfo"); i.className = "status" + (bad ? " err" : ""); i.textContent = text; }
+  var meterTimer;
+  function scheduleMeter() { clearTimeout(meterTimer); meterTimer = setTimeout(updateMeter, 250); }
+  async function updateMeter() {
+    if (VIEW || !OWNER || !$("meter")) return;
+    var cap = capNow();
+    var r = await makeLink();
+    var base = msgBytes(siteBase() + "#f=");
+    var used = r ? r.need : base;
+    var st = used > cap ? "over" : (used > cap - 5 ? "near" : "ok");
+    $("meter").className = "meter " + st;
+    $("meterTxt").textContent = "Espacio del chip: " + used + " de " + cap + " bytes";
+    $("meterBar").style.width = Math.min(100, Math.round(used / cap * 100)) + "%";
+    var h = "";
+    if (st === "over") h = "No cabe. Quita primero seguro, hospital, otra información o el segundo contacto, o usa un chip de mayor capacidad.";
+    else if (st === "near") h = "Va muy justo. Confirma el tamaño en tu app antes de grabar.";
+    else if (!r) h = "La dirección del sitio ya ocupa " + base + " bytes. Una dirección corta deja más espacio.";
+    $("meterHint").textContent = h;
+    $("meterHint").hidden = !h;
+  }
+  if (OWNER) { var mt = $("meter"); if (mt) mt.hidden = false; var oo = $("ownerOpts"); if (oo) oo.hidden = false; }
+  if (capEl) capEl.addEventListener("change", function () { try { localStorage.setItem(CAPKEY, capEl.value); } catch (e) {} scheduleMeter(); });
+  if (siteEl) siteEl.addEventListener("input", function () { try { localStorage.setItem(SITEKEY, siteEl.value.trim()); } catch (e) {} scheduleMeter(); });
+
+  if (ADMIN) $("genBtn").addEventListener("click", async function () {
+    var base = siteBase();
+    if (!/^https?:\/\/\S+$/i.test(base)) { linkMsg("Abre esta página desde su dirección en internet (https://) o escribe la dirección final del sitio en Más opciones.", true); return; }
+    var r = await makeLink();
+    if (!r) { linkMsg("Llena al menos un dato de una persona antes de crear el enlace.", true); return; }
+    var out = $("linkOut");
+    out.value = r.url; out.hidden = false;
+    $("prevLink").href = r.url; $("prevLink").hidden = false;
+    var cap = capNow();
+    var over = r.need > cap, tight = !over && r.need > cap - 5;
+    if (OWNER) {
+      if (over) linkMsg("Ocupa unos " + r.need + " bytes y tu chip admite " + cap + ". Quita datos de menor prioridad" + (r.need <= 504 ? " o usa un chip NTAG215 (504 bytes)." : "."), true);
+      else linkMsg("Ocupa unos " + r.need + " de " + cap + " bytes. Cabe en tu chip" + (tight ? ", pero va muy justo: confirma el tamaño en tu app antes de grabar." : ". Confirma el tamaño en tu app al grabar."));
+    } else if (over) {
+      linkMsg("La ficha es demasiado larga para el chip. Quita datos menos importantes, como el seguro, el hospital u otra información, y crea el enlace otra vez.", true);
+    } else {
+      linkMsg(tight ? "Enlace listo. Va muy justo en el chip: si no se graba, quita un dato menos importante." : "Enlace listo. Cabe en el chip.");
+    }
+  });
+
+  if (ADMIN) $("copyLink").addEventListener("click", function () {
+    var out = $("linkOut");
+    if (!out.value) { toast("Primero genera el enlace"); return; }
+    copyText(out.value, out);
+  });
+  if (ADMIN) $("importBtn").addEventListener("click", async function () {
+    var v = $("importLink").value.trim();
+    var i = v.indexOf("#f=");
+    if (i === -1) { linkMsg("Pega un enlace completo, el que contiene #f=", true); return; }
+    try {
+      store = storeFromArr(await decodeCode(v.slice(i + 3)));
+      persist(); refreshAll();
+      $("importLink").value = "";
+      $("linkOut").hidden = true; $("prevLink").hidden = true;
+      linkMsg("Ficha cargada. Edita los datos y vuelve a crear el enlace.");
+    } catch (e) { linkMsg("No se pudo leer ese enlace. Revisa que esté completo.", true); }
+  });
+  var newArmed = false, newTimer;
+  if (ADMIN) $("newCard").addEventListener("click", function () {
+    var b = this;
+    if (!newArmed) {
+      newArmed = true; b.textContent = "Toca otra vez: se borran las fichas de aquí";
+      newTimer = setTimeout(function () { newArmed = false; b.textContent = "Empezar ficha nueva"; }, 3500);
+      return;
+    }
+    clearTimeout(newTimer); newArmed = false; b.textContent = "Empezar ficha nueva";
+    store = blankStore();
+    persist(); refreshAll();
+    $("linkOut").hidden = true; $("prevLink").hidden = true; linkMsg("");
+    toast("Ficha nueva lista");
+  });
+
+  /* Modo tarjeta: se abre un enlace con #f= */
+  function initView() {
+    var cf = $("chipFicha");
+    if (!VIEW) return;
+    ["ficha", "generador", "chipGen"].forEach(function (id) { var el = $(id); if (el) el.hidden = true; });
+    $("card").hidden = false;
+    cf.href = "#card"; cf.textContent = "Ficha";
+    $("h-geo").textContent = "Enviar ubicación a la familia";
+    $("numHint").hidden = true;
+    $("cardBody").innerHTML = '<p class="empty">Cargando ficha…</p>';
+    decodeCode(location.hash.slice(3)).then(function (arr) {
+      store = storeFromArr(arr);
+      refreshAll();
+    }).catch(function () {
+      $("cardBody").innerHTML = '<p class="status err">No se pudo leer esta tarjeta. Es posible que el enlace esté incompleto. Si es una emergencia, llama al 911.</p>';
+    });
+    window.addEventListener("hashchange", function () { location.reload(); });
+  }
+
+  /* ---------- Ubicación ---------- */
+  var pos = null;
+  var msg = $("msg");
+  var userEdited = false;
+  msg.addEventListener("input", function () { userEdited = true; updateLinks(); });
+
+  function mapsUrl(p) { return "https://www.google.com/maps?q=" + p.lat.toFixed(6) + "," + p.lng.toFixed(6); }
+  function defaultMessage() {
+    var f = readFicha();
+    var base;
+    if (VIEW) base = "Emergencia médica" + (f.nombre ? " de " + f.nombre : "") + ". Necesita ayuda.";
+    else base = (f.nombre ? "Soy " + f.nombre + ". " : "") + "Necesito ayuda.";
+    if (pos) base += " Mi ubicación: " + mapsUrl(pos) + " (precisión aproximada " + Math.round(pos.acc) + " m).";
+    return base;
+  }
+  function refreshMessage() {
+    if (!userEdited) msg.value = (pos || readFicha().nombre) ? defaultMessage() : "";
+    updateLinks();
+  }
+  function updateLinks() {
+    var text = msg.value || defaultMessage();
+    var enc = encodeURIComponent(text);
+    var f = readFicha();
+    var num = digits(f.c1t);
+    if (num.length === 10) num = "52" + num;
+    $("waLink").href = "https://wa.me/" + (num ? num : "") + "?text=" + enc;
+    $("smsLink").href = "sms:" + (digits(f.c1t) || "") + "?&body=" + enc;
+    $("mapLink").href = pos ? mapsUrl(pos) : "https://www.google.com/maps";
+  }
+
+  function geoFail(text) {
+    var s = $("geoStatus");
+    s.className = "status err";
+    s.textContent = text;
+    $("geoBtn").disabled = false;
+    $("geoBtn").textContent = "Intentar de nuevo";
+  }
+
+  $("geoBtn").addEventListener("click", function () {
+    var btn = this;
+    var s = $("geoStatus");
+    if (!navigator.geolocation) {
+      geoFail("Este navegador no permite usar la ubicación. Usa Google Maps para compartirla, o describe dónde estás en el mensaje.");
+      return;
+    }
+    btn.disabled = true;
+    btn.textContent = "Buscando señal…";
+    s.className = "status";
+    s.textContent = "Buscando tu ubicación. Si tienes el GPS apagado, actívalo.";
+    try {
+      navigator.geolocation.getCurrentPosition(function (p) {
+        pos = { lat: p.coords.latitude, lng: p.coords.longitude, acc: p.coords.accuracy || 0 };
+        var c = $("coords");
+        c.hidden = false;
+        c.textContent = "Lat " + pos.lat.toFixed(6) + "  Lon " + pos.lng.toFixed(6) + "  ±" + Math.round(pos.acc) + " m";
+        s.className = "status";
+        s.textContent = "Ubicación lista. Copia el mensaje o envíalo por WhatsApp o SMS.";
+        btn.disabled = false;
+        btn.textContent = "Actualizar mi ubicación";
+        userEdited = false;
+        refreshMessage();
+      }, function (err) {
+        var m = {
+          1: "No diste permiso para usar la ubicación. Actívalo en los ajustes del navegador o describe dónde estás en el mensaje.",
+          2: "No se pudo determinar tu posición. Revisa que el GPS esté encendido o sal a un lugar abierto.",
+          3: "La búsqueda tardó demasiado. Intenta otra vez."
+        };
+        geoFail(m[err && err.code] || "No se pudo obtener la ubicación desde esta vista. Abre la guía en tu navegador o usa Google Maps para compartirla.");
+      }, { enableHighAccuracy: true, timeout: 20000, maximumAge: 0 });
+    } catch (e) {
+      geoFail("No se pudo obtener la ubicación desde esta vista. Abre la guía en tu navegador o usa Google Maps para compartirla.");
+    }
+  });
+
+  $("copyMsg").addEventListener("click", function () {
+    if (!msg.value) msg.value = defaultMessage();
+    copyText(msg.value, msg);
+  });
+
+  refreshMessage();
+  scheduleMeter();
+  initView();
+})();
+</script>
+</body></html>
